@@ -28,6 +28,9 @@ class Square:
 
             print(f"{edge}{middle * (n-2)}{edge}")
 
+    def printInfo(self):
+        print(f"Size is: {self.size}, area is: {self.getArea()}")
+
     def getSize(self):
         """Returns the size of an edge of the Square"""
         return self.size
@@ -60,12 +63,14 @@ oSquare1 = Square(
     5, "-", "|", "*"
 )  # pass in size, horizonal, vertical, and edge characters
 oSquare1.show()
-print("Size is:", oSquare1.getSize(), " area is:", oSquare1.getArea())
+# print("Size is:", oSquare1.getSize(), " area is:", oSquare1.getArea())
+oSquare1.printInfo()
 
 # Create another square of size 10
 oSquare2 = Square(10, "-", "|", "*")
 oSquare2.show()
-print("Size is:", oSquare2.getSize(), " area is:", oSquare2.getArea())
+# print("Size is:", oSquare2.getSize(), " area is:", oSquare2.getArea())
+oSquare2.printInfo()
 
 # Tell the first square to modify its data
 oSquare1.setSize(7)
@@ -73,36 +78,33 @@ oSquare1.setHorizontalChar("^")
 oSquare1.setVerticalChar("?")
 oSquare1.setCornerChar("$")
 oSquare1.show()
-print("Size is:", oSquare1.getSize(), " area is:", oSquare1.getArea())
+# print("Size is:", oSquare1.getSize(), " area is:", oSquare1.getArea())
+oSquare1.printInfo()
 print()
 
 
 # Add code here to ask the user questions, and create and show a new Square based on the answers
 def get_user_input_for_square():
     # get square size
-    print("Please input a square size less than 20:")
-    usr_size = input("> ")
-
-    # validate input
-    while not usr_size.isnumeric() or int(usr_size) > 20:
-        print("Invalid input. Square size must be a number less than 20.")
-        print("Please input a square size")
+    while True:
+        print("Please input a square size between 3 and 20:")
         usr_size = input("> ")
+        # validate input
+        if usr_size.isnumeric() and 3 < int(usr_size) < 20:
+            break
 
     characters = {"corner": None, "vertical": None, "horizontal": None}
 
     for character in characters:
         # get character
-        print(f"Please input a {character} character")
-        usr_input = input("> ")
-
-        # validate
-        while len(usr_input) > 1:
-            print("Invalid input. Please input one character only")
+        while True:
+            print(f"Please input a {character} character")
             usr_input = input("> ")
-
-        # update dict
-        characters[character] = usr_input
+            # validate
+            if len(usr_input) == 1:
+                # update dict
+                characters[character] = usr_input
+                break
 
     usr_choices = characters.copy()
     usr_choices["size"] = int(usr_size)
@@ -111,8 +113,6 @@ def get_user_input_for_square():
     return usr_choices
 
 
-# ******* variable unpacking to make this more elegant??
-# size, corner, vertical, horizontal = get_user_input_for_square()
 usr_data = get_user_input_for_square()
 usr_square = Square(
     size=usr_data["size"],
@@ -121,4 +121,4 @@ usr_square = Square(
     cornerChar=usr_data["corner"],
 )
 usr_square.show()
-print(f"Size is: {usr_square.getSize()}, area is: {usr_square.getArea()}")
+usr_square.printInfo()
