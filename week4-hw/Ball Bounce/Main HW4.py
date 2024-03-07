@@ -6,6 +6,7 @@ from pygame.locals import *
 import sys
 import random
 from Ball import *  # bring in the Ball class code
+from Drop import *
 
 # 2 - Define constants
 BLACK = (0, 0, 0)
@@ -24,10 +25,7 @@ oInstructions = pygame.image.load("images/instructions.jpg")
 
 # 5 - Initialize variables
 ballList = []
-# for i in range(0, N_BALLS):
-#     # create a ball object for each ball
-#     oBall = Ball(window, WINDOW_WIDTH, WINDOW_HEIGHT)
-#     ballList.append(oBall)  # append the new ball to the list of balls
+dropList = []
 
 # 6 - Loop forever
 while True:
@@ -43,10 +41,16 @@ while True:
             if event.key == pygame.K_b:
                 oBall = Ball(window, WINDOW_WIDTH, WINDOW_HEIGHT)
                 ballList.append(oBall)
+            # if key == d, create a new drop (will also accept D)
+            if event.key == pygame.K_d:
+                oDrop = Drop(window, WINDOW_WIDTH, WINDOW_HEIGHT)
+                dropList.append(oDrop)
 
     # 8 - Do any "per frame" actions
     for oBall in ballList:
         oBall.update()  # tell each ball to update itself
+    for oDrop in dropList:
+        oDrop.update()  # tell each drop to update itself
 
     # 9 - Clear the screen before drawing it again
     window.fill(BLACK)
@@ -55,6 +59,8 @@ while True:
     window.blit(oInstructions, (85, 430))
     for oBall in ballList:
         oBall.draw()  # tell each ball to draw itself
+    for oDrop in dropList:
+        oDrop.draw()  # tell each drop to draw itself
 
     # 11 - Update the screen
     pygame.display.update()
