@@ -25,7 +25,9 @@ class Ball:
 
         # Choose a random speed in both the x and y directions
         self.xSpeed = random.randrange(1, 4)
+        self.xSpeed *= random.choice([1, -1])
         self.ySpeed = random.randrange(1, 4)
+        self.ySpeed *= random.choice([1, -1])
 
     def update(self):
         # check for hitting a wall.  If so, change that direction
