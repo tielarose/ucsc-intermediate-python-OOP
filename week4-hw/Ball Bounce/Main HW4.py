@@ -36,7 +36,8 @@ while True:
             pygame.quit()
             sys.exit()
 
-        elif event.type == pygame.KEYDOWN:
+        # check if a user pressed a key
+        if event.type == pygame.KEYDOWN:
             # if key == b, create a new ball (will also accept B)
             if event.key == pygame.K_b:
                 oBall = Ball(window, WINDOW_WIDTH, WINDOW_HEIGHT)
@@ -45,6 +46,14 @@ while True:
             if event.key == pygame.K_d:
                 oDrop = Drop(window, WINDOW_WIDTH, WINDOW_HEIGHT)
                 dropList.append(oDrop)
+
+        # check if a user clicked the mouse
+        if event.type == pygame.MOUSEBUTTONUP:
+            # mouseX, mouseY = event.pos # Could do this if we needed it
+            for oBall in ballList:
+                print(oBall.getCurrRect())
+                if oBall.getCurrRect().collidepoint(event.pos):
+                    oBall.reverse()
 
     # 8 - Do any "per frame" actions
     for oBall in ballList:

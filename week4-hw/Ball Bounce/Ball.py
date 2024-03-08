@@ -2,8 +2,9 @@ import pygame
 from pygame.locals import *
 import random
 
-# BALL CLASS 
-class Ball():
+
+# BALL CLASS
+class Ball:
 
     def __init__(self, window, windowWidth, windowHeight):
         self.window = window  # remember the window, so we can draw later
@@ -17,13 +18,13 @@ class Ball():
         self.height = ballRect[3]
         self.maxWidth = windowWidth - self.width
         self.maxHeight = windowHeight - self.height
-        
-        # Pick a random starting position 
+
+        # Pick a random starting position
         self.x = random.randrange(0, self.maxWidth)
         self.y = random.randrange(0, self.maxHeight)
 
         # Choose a random speed in both the x and y directions
-        self.xSpeed = random.randrange(1, 4)       
+        self.xSpeed = random.randrange(1, 4)
         self.ySpeed = random.randrange(1, 4)
 
     def update(self):
@@ -40,3 +41,10 @@ class Ball():
 
     def draw(self):
         self.window.blit(self.ballImage, (self.x, self.y))
+
+    def getCurrRect(self):
+        return pygame.Rect(self.x, self.y, self.x + self.width, self.y + self.height)
+
+    def reverse(self):
+        self.xSpeed = -self.xSpeed
+        self.ySpeed = -self.ySpeed
