@@ -49,11 +49,9 @@ while True:
 
         # check if a user clicked the mouse
         if event.type == pygame.MOUSEBUTTONUP:
-            # mouseX, mouseY = event.pos # Could do this if we needed it
+            mouseX, mouseY = event.pos  # Could do this if we needed it
             for oBall in ballList:
-                print(oBall.getCurrRect())
-                if oBall.getCurrRect().collidepoint(event.pos):
-                    oBall.reverse()
+                oBall.ifClickedReverse(mouseX, mouseY)
 
     # 8 - Do any "per frame" actions
     for oBall in ballList:

@@ -44,9 +44,15 @@ class Ball:
     def draw(self):
         self.window.blit(self.ballImage, (self.x, self.y))
 
-    def getCurrRect(self):
-        return pygame.Rect(self.x, self.y, self.x + self.width, self.y + self.height)
+    # def getCurrRect(self):
+    #     return pygame.Rect(self.x, self.y, self.x + self.width, self.y + self.height)
 
-    def reverse(self):
-        self.xSpeed = -self.xSpeed
-        self.ySpeed = -self.ySpeed
+    # def reverse(self):
+    #     self.xSpeed = -self.xSpeed
+    #     self.ySpeed = -self.ySpeed
+
+    def ifClickedReverse(self, mouseX, mouseY):
+        currRect = pygame.Rect(self.x, self.y, self.width, self.height)
+        if currRect.collidepoint(mouseX, mouseY):
+            self.xSpeed = -self.xSpeed
+            self.ySpeed = -self.ySpeed
