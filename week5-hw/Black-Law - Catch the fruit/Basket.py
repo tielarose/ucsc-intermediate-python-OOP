@@ -4,13 +4,18 @@ import pygwidgets
 
 
 # Basket class
-class Basket():
+class Basket:
 
-    def __init__(self, window, windowWidth, windowHeight, ):
+    def __init__(
+        self,
+        window,
+        windowWidth,
+        windowHeight,
+    ):
         self.window = window  # remember the window, so we can draw later
         self.windowWidth = windowWidth
         self.windowHeight = windowHeight
-        self.image = pygwidgets.Image(window, (0, 0), 'images/basket.png')
+        self.image = pygwidgets.Image(window, (0, 0), "images/basket.png")
 
         # A rect is made up of [x, y, width, height]
         startingRect = self.image.getRect()
@@ -26,16 +31,21 @@ class Basket():
         self.image.setLoc((self.x, self.y))
 
         # Choose speed in the x direction
-        self.xSpeed = 12
+        self.xSpeed = 9
 
-    def move(self, leftOrRight):
-        # add code here to move the basket and restrict it to stay in the window
+    def move(self, left, right):
+        # input:
+        # left=1 if left key was pressed, else 0
+        # right= 1 if right key was pressed, else 0
+        if left:
+            self.x = max(0, self.x - self.xSpeed)
+        elif right:
+            self.x = min(self.windowWidth - self.width, self.x + self.xSpeed)
         self.image.setLoc((self.x, self.y))
 
     def getRect(self):
         myRect = pygame.Rect(self.x, self.y, self.width, self.height)
         return myRect
-
 
     def draw(self):
         self.image.draw()
