@@ -5,13 +5,14 @@ import pygwidgets
 
 
 # Fruit class
-class Fruit():
+class Fruit:
 
     def __init__(self, window, windowWidth, windowHeight, fruitType, points=15):
         self.window = window  # remember the window, so we can draw later
         self.windowWidth = windowWidth
         self.windowHeight = windowHeight
-        self.image = pygwidgets.Image(window, (0, 0), 'images/apple.png')
+        self.image = pygwidgets.Image(window, (0, 0), f"images/{fruitType}.png")
+        self.type = fruitType
 
         self.points = points
         # A rect is made up of [x, y, width, height]
@@ -23,6 +24,9 @@ class Fruit():
         self.ySpeed = random.randrange(5, 9)
         self.maxX = self.windowWidth - self.width
         self.reset()
+
+    def __repr__(self):
+        return f"<{self.type}: worth {self.points} points>"
 
     def reset(self):
         # Pick a random starting position
@@ -38,7 +42,6 @@ class Fruit():
         # move location
         self.y = self.y + self.ySpeed
         self.image.setLoc((self.x, self.y))
-
 
     def getRect(self):
         myRect = pygame.Rect(self.x, self.y, self.width, self.height)

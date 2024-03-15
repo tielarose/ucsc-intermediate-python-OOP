@@ -15,6 +15,7 @@ WHITE = (255, 255, 255)
 WINDOW_WIDTH = 500
 WINDOW_HEIGHT = 500
 FRAMES_PER_SECOND = 30
+TYPES_OF_FRUIT = ["apple", "banana", "cherry", "grapes", "strawberry", "pear"]
 
 # 3 - Initialize the world
 pygame.init()
@@ -28,7 +29,11 @@ oDisplay = pygwidgets.DisplayText(window, (WINDOW_WIDTH - 120, 10), "", fontSize
 backgroundImage = pygwidgets.Image(window, (0, 0), "images/background.png")
 oBasket = Basket(window, WINDOW_WIDTH, WINDOW_HEIGHT)
 
-oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, "apple")
+fruitList = []
+for fruitType in TYPES_OF_FRUIT:
+    points = -100 if fruitType == "pear" else 15
+    oFruit = Fruit(window, WINDOW_WIDTH, WINDOW_HEIGHT, fruitType)
+    fruitList.append(oFruit)
 
 oRestartButton = pygwidgets.TextButton(window, (5, 5), "Restart")
 
@@ -59,7 +64,8 @@ while True:
         oBasket.move(left=left, right=right)
 
     # 8 - Do any "per frame" actions
-    oFruit.update()  # tell each fruit to update itself
+    for oFruit in fruitList:
+        oFruit.update()  # tell each fruit to update itself
 
     basketRect = oBasket.getRect()
 
@@ -73,7 +79,8 @@ while True:
     backgroundImage.draw()
 
     # 10 - Draw the screen elements
-    oFruit.draw()  # tell each ball to draw itself
+    for oFruit in fruitList:
+        oFruit.draw()  # tell each ball to draw itself
 
     oRestartButton.draw()
     oBasket.draw()
