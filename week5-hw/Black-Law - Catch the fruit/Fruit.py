@@ -43,9 +43,20 @@ class Fruit:
         self.y = self.y + self.ySpeed
         self.image.setLoc((self.x, self.y))
 
+    def detectCollision(self, basketRect):
+        fruitRect = self.getRect()
+        if basketRect.colliderect(fruitRect):
+            print(f"{self.type} has been caught in the basket")
+            self.reset()
+            return True
+        return False
+
     def getRect(self):
         myRect = pygame.Rect(self.x, self.y, self.width, self.height)
         return myRect
+
+    def getPoints(self):
+        return self.points
 
     def draw(self):
         self.image.draw()

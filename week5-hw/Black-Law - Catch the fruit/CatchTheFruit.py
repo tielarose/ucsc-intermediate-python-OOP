@@ -66,14 +66,10 @@ while True:
     # 8 - Do any "per frame" actions
     for oFruit in fruitList:
         oFruit.update()  # tell each fruit to update itself
+        if oFruit.detectCollision(oBasket.getRect()):
+            score += oFruit.getPoints()
 
-    basketRect = oBasket.getRect()
-
-    fruitRect = oFruit.getRect()
-    if basketRect.colliderect(fruitRect):
-        print("Fruit has collided with the basket")
-
-    oDisplay.setValue("Score:" + str(score))
+    oDisplay.setValue(f"Score: {str(score)}")
 
     # 9 - Clear the screen before drawing it again
     backgroundImage.draw()
