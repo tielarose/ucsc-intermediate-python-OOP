@@ -50,7 +50,9 @@ while True:
             sys.exit()
 
         if oRestartButton.handleEvent(event):  # ckicked on the Restart button
-            print("User pressed the Restart button")
+            score = 0
+            for oFruit in fruitList:
+                oFruit.reset()
 
         # Add "continuous mode" code here to check for left or right arrow keys
         # If you get one, tell the basket to move itself appropriately
