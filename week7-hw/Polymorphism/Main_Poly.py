@@ -7,6 +7,7 @@ import sys
 import pygwidgets
 
 from Star import *
+from Frisbee import *
 
 
 # 2 Define constants
@@ -24,17 +25,18 @@ clock = pygame.time.Clock()
 
 
 # 5 - Initialize variables
-oResetButton = pygwidgets.TextButton(window, (300, 420), 'Reset star')
+oResetButton = pygwidgets.TextButton(window, (300, 420), "Reset star")
 oStar = Star(window, (280, 200))
+oFrisbee = Frisbee(window)
 
-myList = [oStar]
+myList = [oStar, oFrisbee]
 
 # 6 - Loop forever
 while True:
 
     # 7 - Check for and handle events
     for event in pygame.event.get():
-        # check if the event is the X button 
+        # check if the event is the X button
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
@@ -45,7 +47,6 @@ while True:
         if event.type == MOUSEBUTTONDOWN:
             for object in myList:
                 object.clickedInside(event.pos)
-
 
     # 8 - Do any "per frame" actions
     for object in myList:
@@ -61,6 +62,6 @@ while True:
 
     # 11 - update the window
     pygame.display.update()
-    
+
     # 12 - slow things down a bit
     clock.tick(FRAMES_PER_SECOND)  # make Pygame wait the correct amount

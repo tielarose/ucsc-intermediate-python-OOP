@@ -5,9 +5,9 @@ import pygwidgets
 import random
 
 
-class Star():
+class Star:
     def __init__(self, window, loc):
-        self.image = pygwidgets.Image(window, loc, 'images/Star.png')
+        self.image = pygwidgets.Image(window, loc, "images/Star.png")
         self.startX = loc[0]
         self.startY = loc[1]
         self.x = self.startX
@@ -28,7 +28,7 @@ class Star():
 
         self.x = self.x + self.speedX
         self.y = self.y + self.speedY
-        #print('New loc is:', (self.loc)
+        # print('New loc is:', (self.loc)
         self.image.setLoc((self.x, self.y))
         self.nFrames = self.nFrames - 1
         if self.nFrames == 0:
