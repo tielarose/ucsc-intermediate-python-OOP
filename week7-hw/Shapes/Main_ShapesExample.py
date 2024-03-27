@@ -4,6 +4,7 @@ from pygame.locals import *
 from Square import *
 from Circle import *
 from Triangle import *
+from Rectangle import *
 import pygwidgets
 
 # set up the constants
@@ -19,19 +20,20 @@ window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT), 0, 32)
 clock = pygame.time.Clock()
 
 shapesList = []
-shapeTypesTuple = ('square', 'circle', 'triangle')
+shapeTypesTuple = ("square", "circle", "triangle", "rectangle")
 for i in range(0, N_SHAPES):
     thisType = random.choice(shapeTypesTuple)
-    if thisType == 'square':
+    if thisType == "square":
         oShape = Square(window)
-    elif thisType == 'circle':
+    elif thisType == "circle":
         oShape = Circle(window)
+    elif thisType == "rectangle":
+        oShape = Rectangle(window)
     else:  # must be triangle
         oShape = Triangle(window)
     shapesList.append(oShape)
 
-statusLine = pygwidgets.DisplayText(window, (4,4), \
-                    'Click on shapes', fontSize=28)
+statusLine = pygwidgets.DisplayText(window, (4, 4), "Click on shapes", fontSize=28)
 
 # main loop
 while True:
@@ -45,7 +47,9 @@ while True:
                 if oShape.clickedInside(event.pos):
                     thisArea = oShape.getArea()
                     thisType = oShape.getType()
-                    newText = 'Clicked on a ' + thisType + ' whose area is ' + str(thisArea)
+                    newText = (
+                        "Clicked on a " + thisType + " whose area is " + str(thisArea)
+                    )
                     statusLine.setValue(newText)
 
     # draw on the surface object
