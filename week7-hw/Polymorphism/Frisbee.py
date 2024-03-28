@@ -16,14 +16,14 @@ class Frisbee:
 
     def clickedInside(self, mousePoint):
         if self.rect.collidepoint(mousePoint):
-            self.nFrames = 15
+            self.nFrames = 30
             self.isRotating = True
 
     def update(self):
         if not self.isRotating:
             return
 
-        self.image.rotate(60)
+        self.image.rotate(15)
         self.nFrames -= 1
         if self.nFrames == 0:
             self.isRotating = False

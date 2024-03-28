@@ -8,6 +8,7 @@ import pygwidgets
 
 from Star import *
 from Frisbee import *
+from Square import *
 
 
 # 2 Define constants
@@ -28,8 +29,9 @@ clock = pygame.time.Clock()
 oResetButton = pygwidgets.TextButton(window, (300, 420), "Reset star")
 oStar = Star(window, (280, 200))
 oFrisbee = Frisbee(window)
+oSquare = Square(window)
 
-myList = [oStar, oFrisbee]
+myList = [oStar, oFrisbee, oSquare]
 
 # 6 - Loop forever
 while True:
