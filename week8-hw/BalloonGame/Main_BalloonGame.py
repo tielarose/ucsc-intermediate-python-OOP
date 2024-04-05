@@ -22,16 +22,30 @@ window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 clock = pygame.time.Clock()
 
 # 4 - Load assets: image(s), sounds,  etc.
-oScoreDisplay = pygwidgets.DisplayText(window, (10, USABLE_WINDOW_HEIGHT + 25),
-                    'Score: 0', textColor=BLACK,
-                    backgroundColor=None, width=140, fontSize=24)
-oStatusDisplay = pygwidgets.DisplayText(window, (180, USABLE_WINDOW_HEIGHT + 25),
-                    '', textColor=BLACK, backgroundColor=None,
-                    width=300, fontSize=24)
-oStartButton = pygwidgets.TextButton(window,
-                    (WINDOW_WIDTH - 110, USABLE_WINDOW_HEIGHT + 10),
-                    'Start')
-oBackground = pygwidgets.Image(window, (0, 0), 'images/Sky.png') # Background image taken from "pngtree" on Pinterest
+oScoreDisplay = pygwidgets.DisplayText(
+    window,
+    (10, USABLE_WINDOW_HEIGHT + 25),
+    "Score: 0",
+    textColor=BLACK,
+    backgroundColor=None,
+    width=140,
+    fontSize=24,
+)
+oStatusDisplay = pygwidgets.DisplayText(
+    window,
+    (180, USABLE_WINDOW_HEIGHT + 25),
+    "",
+    textColor=BLACK,
+    backgroundColor=None,
+    width=300,
+    fontSize=24,
+)
+oStartButton = pygwidgets.TextButton(
+    window, (WINDOW_WIDTH - 110, USABLE_WINDOW_HEIGHT + 10), "Start"
+)
+oBackground = pygwidgets.Image(
+    window, (0, 0), "images/Sky.png"
+)  # Background image taken from "pngtree" on Pinterest
 
 
 # 5 - Initialize variables
@@ -43,7 +57,7 @@ while True:
     # 7 - Check for and handle events
     nPointsEarned = 0
     for event in pygame.event.get():
-    
+
         # check if the event is the close button
         if event.type == pygame.QUIT:
             # if it is quit, the program
@@ -53,10 +67,10 @@ while True:
         if playing:
             oBalloonMgr.handleEvent(event)
             theScore = oBalloonMgr.getScore()
-            oScoreDisplay.setValue('Score: ' + str(theScore))
+            oScoreDisplay.setValue("Score: " + str(theScore))
         elif oStartButton.handleEvent(event):
             oBalloonMgr.start()
-            oScoreDisplay.setValue('Score: 0')
+            oScoreDisplay.setValue("Score: 0")
             playing = True
             oStartButton.disable()
 
@@ -65,9 +79,14 @@ while True:
         oBalloonMgr.update()
         nPopped = oBalloonMgr.getCountPopped()
         nMissed = oBalloonMgr.getCountMissed()
-        oStatusDisplay.setValue('Popped: ' + str(nPopped) +
-                        '   Missed: ' + str(nMissed) +
-                        '   Out of: ' + str(N_BALLOONS))
+        oStatusDisplay.setValue(
+            "Popped: "
+            + str(nPopped)
+            + "   Missed: "
+            + str(nMissed)
+            + "   Out of: "
+            + str(N_BALLOONS)
+        )
 
         if (nPopped + nMissed) == N_BALLOONS:
             playing = False
@@ -80,8 +99,9 @@ while True:
     if playing:
         oBalloonMgr.draw()
 
-    pygame.draw.rect(window, GRAY, pygame.Rect(0,
-                USABLE_WINDOW_HEIGHT, WINDOW_WIDTH, PANEL_HEIGHT))
+    pygame.draw.rect(
+        window, GRAY, pygame.Rect(0, USABLE_WINDOW_HEIGHT, WINDOW_WIDTH, PANEL_HEIGHT)
+    )
     oScoreDisplay.draw()
     oStatusDisplay.draw()
     oStartButton.draw()

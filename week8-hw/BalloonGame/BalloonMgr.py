@@ -7,10 +7,11 @@ import pygwidgets
 from BalloonConstants import *
 from Balloon import *
 
+
 #
 #  BalloonMgr manages a list of Balloon objects
 #
-class BalloonMgr():
+class BalloonMgr:
 
     def __init__(self, window, maxWidth, maxHeight):
         self.window = window
@@ -23,13 +24,20 @@ class BalloonMgr():
         self.nMissed = 0
         self.score = 0
 
-        for balloonNum in range(0, N_BALLOONS):
-            randomBalloonClass = random.choice((BalloonSmall,
-                                                         BalloonMedium, BalloonLarge))
-            oBalloon = randomBalloonClass(self.window, self.maxWidth,
-                                                        self.maxHeight, balloonNum)
+        for balloonNum in range(2):
+            oBalloon = BalloonMega(
+                self.window, self.maxWidth, self.maxHeight, balloonNum
+            )
             self.balloonList.append(oBalloon)
 
+        for balloonNum in range(2, N_BALLOONS):
+            randomBalloonClass = random.choice(
+                (BalloonSmall, BalloonMedium, BalloonLarge)
+            )
+            oBalloon = randomBalloonClass(
+                self.window, self.maxWidth, self.maxHeight, balloonNum
+            )
+            self.balloonList.append(oBalloon)
 
     def handleEvent(self, event):
         if event.type == MOUSEBUTTONDOWN:
@@ -37,8 +45,8 @@ class BalloonMgr():
             for oBalloon in reversed(self.balloonList):
                 wasHit, nPoints = oBalloon.clickedInside(event.pos)
                 if wasHit:
-                    if nPoints > 0: # remove this balloon
-                        self.balloonList.remove(oBalloon)  
+                    if nPoints > 0:  # remove this balloon
+                        self.balloonList.remove(oBalloon)
                         self.nPopped = self.nPopped + 1
                         self.score = self.score + nPoints
                     return  # no need to check others
